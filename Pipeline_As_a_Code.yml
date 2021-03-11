@@ -11,7 +11,7 @@
 stages:
 - stage: First_Stage
   jobs:
-  - job: Job
+  - job: Job1
     pool:
       vmImage: windows-latest
     steps:
@@ -25,7 +25,7 @@ stages:
 
 - stage: Second_Stage
   jobs:
-  - job: Job
+  - job: Job2
 #Please, change the agent pool using the Hosted Agent instead of the Microsoft VMImage
     pool:
       vmImage: Ubuntu-latest
@@ -37,3 +37,13 @@ stages:
           # Write your commands here
       
             echo 'My Second Stage'
+
+#Examples:
+
+#EX1
+#condition: and(succeeded(), eq(variables['BuildWebApp2'], 'true'))
+
+#EX2
+#- job: Job2
+#  dependsOn: Job1
+#  condition: failed() # this job will only run if Foo fails

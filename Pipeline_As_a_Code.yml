@@ -9,7 +9,7 @@
 #    - main
 
 stages:
-- stage: First Stage
+- stage: First_Stage
   jobs:
   - job: Job
     pool:
@@ -23,7 +23,7 @@ stages:
       
             echo 'My First Stage'
 
-- stage: SecondStage
+- stage: Second_Stage
   jobs:
   - job: Job
 #Please, change the agent pool using the Hosted Agent instead of the Microsoft VMImage

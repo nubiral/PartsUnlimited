@@ -37,5 +37,5 @@ jobs:
       with:
         #nuget-api-key: ${{ secrets.NuGetAPIKey }}
         nuget-version: '5.x'
-    - run: nuget restore PartsUnlimited/PartsUnlimited-aspnet45/PartsUnlimited.sln
+    - run: nuget restore PartsUnlimited-aspnet45/PartsUnlimited.sln
     

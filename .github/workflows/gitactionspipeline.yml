@@ -14,44 +14,27 @@ on:
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-    
 jobs:
+  # This workflow contains a single job called "build"
   build:
-    if: github.event_name == 'push' && contains(toJson(github.event.commits), '***NO_CI***') == false && contains(toJson(github.event.commits), '[ci skip]') == false && contains(toJson(github.event.commits), '[skip ci]') == false
-    name: Build 
-    runs-on: ubuntu-latest
-    env:
-      DOTNET_CLI_TELEMETRY_OPTOUT: 1
-      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-      DOTNET_NOLOGO: true
-      DOTNET_GENERATE_ASPNET_CERTIFICATE: false
-      DOTNET_ADD_GLOBAL_TOOLS_TO_PATH: false
-      DOTNET_MULTILEVEL_LOOKUP: 0
- 
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Bash for GitHub Actions
-      run: cd PartsUnlimited-aspnet45 | ls -lha
+    # The type of runner that the job will run on
+    runs-on: windows-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job           
+    steps:
+# Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@master
+    
+    - name: Azure PowerShell Action
+      uses: Azure/powershell@v1
+      with:
+        azPSVersion: "latest"
+        # Specify the Az PowerShell script here.
+        inlineScript: DIR
+    
     - name: nuget restore
       uses: nuget/setup-nuget@v1
       with:
         #nuget-api-key: ${{ secrets.NuGetAPIKey }}
         nuget-version: '5.x'
-    - run: nuget restore PartsUnlimited.sln
-    
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
- 
-    - name: Restore
-      run: dotnet restore 
- 
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
- 
-    - name: Test
-      run: dotnet test
-      
+    - run: nuget restore PartsUnlimited-aspnet45/PartsUnlimited.sln

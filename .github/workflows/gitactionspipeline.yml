@@ -43,10 +43,10 @@ jobs:
         dotnet-version: 5.0.x
  
     - name: Restore
-      run: dotnet restore PartsUnlimited-aspnet45/PartsUnlimited.sln
+      run: dotnet restore PartsUnlimited-aspnet45/*
  
     - name: Build
-      run: dotnet build PartsUnlimited-aspnet45/PartsUnlimited.sln --configuration Release --no-restore
+      run: dotnet build PartsUnlimited-aspnet45/* --configuration Release --no-restore
  
     - name: Test
       run: dotnet test

@@ -32,14 +32,14 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Bash for GitHub Actions
-      run: cd PartsUnlimited-aspnet45
+      run: cd PartsUnlimited-aspnet45 | ls -lha
 
     - name: nuget restore
       uses: nuget/setup-nuget@v1
       with:
         #nuget-api-key: ${{ secrets.NuGetAPIKey }}
         nuget-version: '5.x'
-    - run: nuget restore PartsUnlimited-aspnet45/PartsUnlimited.sln
+    - run: nuget restore PartsUnlimited.sln
     
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
@@ -50,7 +50,7 @@ jobs:
       run: dotnet restore 
  
     - name: Build
-      run: dotnet build  --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
  
     - name: Test
       run: dotnet test
